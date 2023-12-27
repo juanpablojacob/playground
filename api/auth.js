@@ -4,7 +4,6 @@ import { hashPassword } from "../lib/utils.js"
 async function authenticateUser(req, res) {
   const credentials = req.body
   credentials.password = await hashPassword(credentials.password)
-  console.log(credentials)
   const user = await db
     .collection("users")
     .findOne(credentials, { projection: { password: 0 } })
